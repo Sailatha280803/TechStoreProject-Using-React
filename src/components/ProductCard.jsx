@@ -9,7 +9,6 @@ export default function ProductCard({
   discount,
   rating,
   isBestSeller,
-  brand,
   isWishlisted,
   onAddToCart,
   onToggleWishlist,
@@ -18,11 +17,12 @@ export default function ProductCard({
     <div className="product-card">
       {/* Discount Badge */}
       {discount && <span className="discount-badge">{discount}</span>}
+
       <button
         className={`wishlisted ${isWishlisted ? "active" : ""}`}
         onClick={onToggleWishlist}
       >
-        {isWishlisted ? "🤍" : "❤️"}
+        {isWishlisted ? "❤️" : "🤍"}
       </button>
 
       {/* Product Image */}
