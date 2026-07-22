@@ -2,10 +2,18 @@ import ProductCard from "./components/ProductCard";
 import products from "./data";
 import "./App.css";
 import { useState, useEffect } from "react";
+import { useRef } from "react";
+import User from "./components/User";
 
 function App() {
   //BRANDS
   const allBrands = [...new Set(products.map((p) => p.brand))];
+
+  //useRef hook use for no re rendering. return a mutable object.
+  const topRef = useRef(null);
+  function scrollOnTop() {
+    topRef.current.scrollIntoView();
+  }
 
   // State
   // Cart - array of products in cart
@@ -150,7 +158,8 @@ function App() {
   }
 
   return (
-    <div className="app">
+    // here why we use that topref here because, currently whereever you are from in website that will take you to top. when you click back it will take to you that top of the website. if want that scroll till products you can give that topRef inside products section like that.
+    <div className="app" ref={topRef}>
       {/* Navigation */}
       <nav className="navbar">
         <div className="nav-container">
@@ -269,6 +278,7 @@ function App() {
 
             <button className="nav-btn">Sign In</button>
             <button className="nav-btn primary">Shop Now</button>
+            <User userName="Sai Latha" />
           </div>
         </div>
       </nav>
@@ -547,6 +557,21 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <p>&copy; 2024 TechStore. All rights reserved.</p>
+        <button
+          onClick={scrollOnTop}
+          style={{
+            position: "fixed",
+            bottom: "30px",
+            right: "30px",
+            width: "80px",
+            padding: "10px",
+            border: "1px solid blue",
+            borderRadius: "20px",
+            backgroundColor: "lightskyblue",
+          }}
+        >
+          BACK
+        </button>
       </footer>
     </div>
   );
